@@ -38,7 +38,7 @@ public class BlockPortal extends Block {
 	                                @Nullable
 		                                ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
 		if (!worldIn.isRemote && !playerIn.isSneaking()) {
-			if (worldIn.provider.getDimension() == 0) {
+			if (worldIn.provider.getDimension() != Config.dimID) {
 				FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().transferPlayerToDimension((EntityPlayerMP) playerIn, Config.dimID, new WorldTeleporter(playerIn.getServer().worldServerForDimension(Config.dimID), pos));
 			} else {
 				FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().transferPlayerToDimension((EntityPlayerMP) playerIn, 0, new WorldTeleporter(playerIn.getServer().worldServerForDimension(0), pos));
