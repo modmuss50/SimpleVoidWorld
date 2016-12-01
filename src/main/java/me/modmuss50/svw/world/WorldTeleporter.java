@@ -36,10 +36,8 @@ public class WorldTeleporter extends Teleporter {
 				}
 			}
 			pos = ((EntityPlayer) entityIn).getBedLocation(world.provider.getDimension());
-			System.out.println(pos);
 			if(pos == null){
 				pos = world.provider.getRandomizedSpawnPoint();
-				System.out.println(pos);
 			}
 		}
 		if (world.provider.getDimension() == Config.dimID) {
