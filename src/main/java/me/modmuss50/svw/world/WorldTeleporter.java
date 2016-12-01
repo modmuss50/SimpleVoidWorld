@@ -5,6 +5,7 @@ import me.modmuss50.svw.SimpleVoidWorld;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.WorldServer;
@@ -40,16 +41,20 @@ public class WorldTeleporter extends Teleporter {
 			//TODO look around for a free space so it doesnt place in a base?
 			pos = new BlockPos(pos.getX(), 64, pos.getZ());
 			if (world.getBlockState(pos).getBlock() != SimpleVoidWorld.portal) {
+				int color = world.rand.nextInt(15);
 				for (int x = -3; x < 4; x++) {
 					for (int z = -3; z < 4; z++) {
 						if (world.isAirBlock(pos.add(x, 0, z))) {
-							world.setBlockState(pos.add(x, 0, z), Blocks.STAINED_HARDENED_CLAY.getDefaultState());
+							world.setBlockState(pos.add(x, 0, z), Blocks.STAINED_HARDENED_CLAY.getStateFromMeta(color));
 						}
 
 					}
 				}
 				world.setBlockState(pos, SimpleVoidWorld.portal.getDefaultState());
-				world.setBlockState(pos.up(), Blocks.TORCH.getDefaultState());
+				for(EnumFacing facing : EnumFacing.HORIZONTALS){
+					world.setBlockState(pos.up().offset(facing), Blocks.TORCH.getDefaultState());
+				}
+
 			}
 		}
 

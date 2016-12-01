@@ -1,8 +1,10 @@
 package me.modmuss50.svw.blocks;
 
 import me.modmuss50.svw.Config;
+import me.modmuss50.svw.SimpleVoidWorld;
 import me.modmuss50.svw.world.WorldTeleporter;
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
@@ -25,18 +27,23 @@ public class BlockPortal extends Block {
 		super(Material.PORTAL);
 		setCreativeTab(CreativeTabs.MISC);
 		setUnlocalizedName("simplevoidworld:portal");
+		setCreativeTab(SimpleVoidWorld.creativeTab);
+		setHardness(5.0F);
+		setResistance(2000.0F);
+		setSoundType(SoundType.STONE);
 	}
 
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand,
 	                                @Nullable
 		                                ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
-		if (!worldIn.isRemote) {
+		if (!worldIn.isRemote && !playerIn.isSneaking()) {
 			if (worldIn.provider.getDimension() == 0) {
 				FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().transferPlayerToDimension((EntityPlayerMP) playerIn, Config.dimID, new WorldTeleporter(playerIn.getServer().worldServerForDimension(Config.dimID), pos));
 			} else {
 				FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().transferPlayerToDimension((EntityPlayerMP) playerIn, 0, new WorldTeleporter(playerIn.getServer().worldServerForDimension(0), pos));
 			}
+			return true;
 		}
 		return super.onBlockActivated(worldIn, pos, state, playerIn, hand, heldItem, side, hitX, hitY, hitZ);
 	}
