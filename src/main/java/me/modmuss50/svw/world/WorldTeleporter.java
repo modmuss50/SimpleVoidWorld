@@ -27,18 +27,23 @@ public class WorldTeleporter extends Teleporter {
 	@Override
 	public void placeInPortal(Entity entityIn, float rotationYaw) {
 		if (world.provider.getDimension() != Config.dimID && entityIn instanceof EntityPlayer) {
+			boolean foundBlock = false;
 			BlockPos.MutableBlockPos mutableBlockPos = new BlockPos.MutableBlockPos(pos.getX(), 0, pos.getZ());
 			for (int y = 0; y < 256; y++) {
 				mutableBlockPos.setY(y);
 				if (world.getBlockState(mutableBlockPos).getBlock() == SimpleVoidWorld.portal) {
 					pos = new BlockPos(pos.getX(), y + 1, pos.getZ());
+					foundBlock = true;
 					break;
 				}
 			}
-			pos = ((EntityPlayer) entityIn).getBedLocation(world.provider.getDimension());
-			if(pos == null){
-				pos = world.provider.getRandomizedSpawnPoint();
+			if(!foundBlock){
+				pos = ((EntityPlayer) entityIn).getBedLocation(world.provider.getDimension());
+				if(pos == null){
+					pos = world.provider.getRandomizedSpawnPoint();
+				}
 			}
+
 		}
 		if (world.provider.getDimension() == Config.dimID) {
 			//TODO look around for a free space so it doesnt place in a base?
