@@ -35,8 +35,7 @@ public class BlockPortal extends Block {
 
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand,
-	                                @Nullable
-		                                ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
+	                                EnumFacing side, float hitX, float hitY, float hitZ) {
 		if (!worldIn.isRemote && !playerIn.isSneaking()) {
 			if (worldIn.provider.getDimension() != Config.dimID) {
 				FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().transferPlayerToDimension((EntityPlayerMP) playerIn, Config.dimID, new WorldTeleporter(playerIn.getServer().worldServerForDimension(Config.dimID), pos));
@@ -45,6 +44,6 @@ public class BlockPortal extends Block {
 			}
 			return true;
 		}
-		return super.onBlockActivated(worldIn, pos, state, playerIn, hand, heldItem, side, hitX, hitY, hitZ);
+		return super.onBlockActivated(worldIn, pos, state, playerIn, hand, side, hitX, hitY, hitZ);
 	}
 }

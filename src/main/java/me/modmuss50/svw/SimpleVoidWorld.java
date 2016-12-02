@@ -55,8 +55,8 @@ public class SimpleVoidWorld {
 		}
 
 		@Override
-		public Item getTabIconItem() {
-			return Item.getItemFromBlock(portal);
+		public ItemStack getTabIconItem() {
+			return new ItemStack(portal);
 		}
 	}
 }

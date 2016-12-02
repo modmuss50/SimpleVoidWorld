@@ -18,7 +18,7 @@ public class VoidWorldProvider extends WorldProvider {
 
 	@Override
 	public IChunkGenerator createChunkGenerator() {
-		return new VoidChunkGenerator(worldObj);
+		return new VoidChunkGenerator(world);
 	}
 
 	@Override
