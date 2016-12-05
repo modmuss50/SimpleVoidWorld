@@ -37,13 +37,13 @@ public class SimpleVoidWorld {
 		RebornRegistry.registerBlock(portal, "simplevoidworld:portal");
 
 		proxy.init();
+
+		DimensionType type = DimensionType.register("simplevoidworld", "void", Config.dimID, VoidWorldProvider.class, false);
+		DimensionManager.registerDimension(Config.dimID, type);
 	}
 
 	@Mod.EventHandler
 	public void init(FMLInitializationEvent event) {
-		DimensionType type = DimensionType.register("simplevoidworld", "void", Config.dimID, VoidWorldProvider.class, false);
-		DimensionManager.registerDimension(Config.dimID, type);
-
 		CraftingHelper.addShapedOreRecipe(new ItemStack(portal), "OEO", "EDE", "OEO", 'O',
 			Blocks.OBSIDIAN, 'E', Items.ENDER_EYE, 'D', Blocks.DIAMOND_BLOCK);
 	}
