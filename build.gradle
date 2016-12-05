@@ -31,10 +31,35 @@ repositories {
 
 
 repositories {
-    maven {
-        name = "Modmuss50"
-        url = "http://maven.modmuss50.me/"
-    }
+	maven {
+		name = "Modmuss50"
+		url = "http://maven.modmuss50.me/"
+	}
+
+	maven {
+		name = "player-ic2"
+		url = "http://maven.ic2.player.to/"
+	}
+
+	maven {
+		name = "Dankhax"
+		url = "http://maven.epoxide.xyz"
+	}
+
+	maven {
+		name = "prog"
+		url = "http://dvs1.progwml6.com/files/maven"
+	}
+
+	maven {
+		name = "tterrag"
+		url = "http://maven.tterrag.com/"
+	}
+
+	maven {
+		name "TehNut"
+		url "http://tehnut.info/maven/"
+	}
 }
 
 version = "1.0.0"
