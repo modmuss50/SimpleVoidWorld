@@ -37,7 +37,7 @@ repositories {
     }
 }
 
-version = "1.0.0"
+version = "1.1.0"
 
 def ENV = System.getenv()
 if (ENV.BUILD_NUMBER) {
@@ -46,7 +46,7 @@ if (ENV.BUILD_NUMBER) {
 
 minecraft {
 	version = "1.10.2-12.18.2.2121"
-	mappings = "snapshot_20161105"
+	mappings = "stable_29"
     replace "@MODVERSION@", project.version
     runDir = "run"
     makeObfSourceJar = false

@@ -1,11 +1,14 @@
 package me.modmuss50.svw.world;
 
 import me.modmuss50.svw.Config;
+import me.modmuss50.svw.SimpleVoidWorld;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.chunk.IChunkGenerator;
+
+import javax.annotation.Nullable;
 
 /**
  * Created by modmuss50 on 01/12/16.
@@ -13,12 +16,12 @@ import net.minecraft.world.chunk.IChunkGenerator;
 public class VoidWorldProvider extends WorldProvider {
 	@Override
 	public DimensionType getDimensionType() {
-		return DimensionType.OVERWORLD;
+		return SimpleVoidWorld.type;
 	}
 
 	@Override
 	public IChunkGenerator createChunkGenerator() {
-		return new VoidChunkGenerator(worldObj);
+		return new VoidChunkGenerator(world);
 	}
 
 	@Override
@@ -49,5 +52,23 @@ public class VoidWorldProvider extends WorldProvider {
 		}
 		return super.getWorldTime();
 	}
+
+	@Override
+	public boolean isDaytime() {
+		if (Config.eternalDay) {
+			return true;
+		}
+		return super.isDaytime();
+	}
+
+	@Nullable
+	@Override
+	public float[] calcSunriseSunsetColors(float celestialAngle, float partialTicks) {
+		if (Config.darkSky) {
+			return null;
+		}
+		return super.calcSunriseSunsetColors(celestialAngle, partialTicks);
+	}
+
 
 }

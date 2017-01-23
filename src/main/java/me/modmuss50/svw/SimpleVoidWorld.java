@@ -27,6 +27,7 @@ public class SimpleVoidWorld {
 
 	@SidedProxy(clientSide = "me.modmuss50.svw.proxy.ClientProxy", serverSide = "me.modmuss50.svw.proxy.CommonProxy")
 	public static CommonProxy proxy;
+	public static DimensionType type;
 
 	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event){
@@ -38,7 +39,7 @@ public class SimpleVoidWorld {
 
 		proxy.init();
 
-		DimensionType type = DimensionType.register("simplevoidworld", "void", Config.dimID, VoidWorldProvider.class, false);
+		type = DimensionType.register("simplevoidworld", "void", Config.dimID, VoidWorldProvider.class, false);
 		DimensionManager.registerDimension(Config.dimID, type);
 	}
 
