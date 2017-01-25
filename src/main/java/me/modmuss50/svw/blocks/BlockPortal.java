@@ -47,4 +47,12 @@ public class BlockPortal extends Block {
 		}
 		return super.onBlockActivated(worldIn, pos, state, playerIn, hand, heldItem, side, hitX, hitY, hitZ);
 	}
+
+	@Override
+	public float getBlockHardness(IBlockState blockState, World worldIn, BlockPos pos) {
+		if(worldIn.provider.getDimension() == Config.dimID){
+			return 1000F;
+		}
+		return super.getBlockHardness(blockState, worldIn, pos);
+	}
 }
