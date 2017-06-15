@@ -1,14 +1,12 @@
 package me.modmuss50.svw;
 
 import me.modmuss50.svw.blocks.BlockPortal;
-import me.modmuss50.svw.proxy.ClientProxy;
 import me.modmuss50.svw.proxy.CommonProxy;
 import me.modmuss50.svw.world.VoidWorldProvider;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.DimensionType;
 import net.minecraftforge.common.DimensionManager;
@@ -17,7 +15,7 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import reborncore.RebornRegistry;
-import reborncore.common.util.CraftingHelper;
+import reborncore.common.util.RebornCraftingHelper;
 
 @Mod(modid = "simplevoidworld", name = "SimpleVoidWorld", version = "@MODVERSION@", dependencies = "required-after:reborncore")
 public class SimpleVoidWorld {
@@ -45,7 +43,7 @@ public class SimpleVoidWorld {
 
 	@Mod.EventHandler
 	public void init(FMLInitializationEvent event) {
-		CraftingHelper.addShapedOreRecipe(new ItemStack(portal), "OEO", "EDE", "OEO", 'O',
+		RebornCraftingHelper.addShapedOreRecipe(new ItemStack(portal), "OEO", "EDE", "OEO", 'O',
 			Blocks.OBSIDIAN, 'E', Items.ENDER_EYE, 'D', Blocks.DIAMOND_BLOCK);
 	}
 

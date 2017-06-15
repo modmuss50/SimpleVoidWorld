@@ -11,7 +11,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:2.2-SNAPSHOT'
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
     }
 }
 apply plugin: 'net.minecraftforge.gradle.forge'
@@ -29,40 +29,7 @@ repositories {
     }
 }
 
-
-repositories {
-	maven {
-		name = "Modmuss50"
-		url = "http://maven.modmuss50.me/"
-	}
-
-	maven {
-		name = "player-ic2"
-		url = "http://maven.ic2.player.to/"
-	}
-
-	maven {
-		name = "Dankhax"
-		url = "http://maven.epoxide.xyz"
-	}
-
-	maven {
-		name = "prog"
-		url = "http://dvs1.progwml6.com/files/maven"
-	}
-
-	maven {
-		name = "tterrag"
-		url = "http://maven.tterrag.com/"
-	}
-
-	maven {
-		name "TehNut"
-		url "http://tehnut.info/maven/"
-	}
-}
-
-version = "1.1.0"
+version = "1.2.0"
 
 def ENV = System.getenv()
 if (ENV.BUILD_NUMBER) {
@@ -70,8 +37,8 @@ if (ENV.BUILD_NUMBER) {
 }
 
 minecraft {
-	version = "1.11-13.19.0.2152"
-	mappings = "snapshot_20161118"
+	version = "1.12-14.21.0.2327"
+	mappings = "snapshot_20170615"
     replace "@MODVERSION@", project.version
     runDir = "run"
     makeObfSourceJar = false
@@ -81,7 +48,9 @@ group = 'SimpleVoidWorld'
 
 
 dependencies {
-	deobfCompile 'RebornCore:RebornCore-1.11:+:universal'
+	compile('RebornCore:RebornCore-1.12:+:dev') {
+		transitive = false
+	}
 }
 
 processResources
