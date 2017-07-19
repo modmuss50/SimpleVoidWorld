@@ -4,9 +4,6 @@ import net.minecraftforge.common.config.Configuration;
 
 import java.io.File;
 
-/**
- * Created by modmuss50 on 01/12/16.
- */
 public class Config {
 
 	public static Configuration config;
