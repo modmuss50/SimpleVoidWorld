@@ -16,9 +16,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 
-/**
- * Created by modmuss50 on 01/12/16.
- */
 public class BlockPortal extends Block {
 	public BlockPortal() {
 		super(Material.PORTAL);
