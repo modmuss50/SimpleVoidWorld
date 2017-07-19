@@ -11,9 +11,6 @@ import net.minecraft.world.gen.IChunkGenerator;
 import javax.annotation.Nullable;
 import java.util.List;
 
-/**
- * Created by modmuss50 on 01/12/16.
- */
 public class VoidChunkGenerator implements IChunkGenerator {
 
 	private final World world;
