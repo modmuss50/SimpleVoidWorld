@@ -10,9 +10,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.WorldServer;
 
-/**
- * Created by modmuss50 on 01/12/16.
- */
 public class WorldTeleporter extends Teleporter {
 
 	BlockPos pos;

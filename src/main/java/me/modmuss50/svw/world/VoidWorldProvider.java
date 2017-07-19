@@ -10,9 +10,6 @@ import net.minecraft.world.gen.IChunkGenerator;
 
 import javax.annotation.Nullable;
 
-/**
- * Created by modmuss50 on 01/12/16.
- */
 public class VoidWorldProvider extends WorldProvider {
 	@Override
 	public DimensionType getDimensionType() {

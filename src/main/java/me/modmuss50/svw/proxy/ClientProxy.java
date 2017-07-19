@@ -6,9 +6,6 @@ import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
 
-/**
- * Created by modmuss50 on 02/12/16.
- */
 public class ClientProxy extends CommonProxy {
 
 	@Override
