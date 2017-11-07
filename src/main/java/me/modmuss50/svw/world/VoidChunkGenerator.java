@@ -9,6 +9,9 @@ import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.chunk.IChunkGenerator;
 
 import javax.annotation.Nullable;
+
+import me.modmuss50.svw.Config;
+
 import java.util.List;
 
 /**
@@ -37,7 +40,6 @@ public class VoidChunkGenerator implements IChunkGenerator {
 
 	@Override
 	public void populate(int x, int z) {
-
 	}
 
 	@Override
@@ -47,7 +49,10 @@ public class VoidChunkGenerator implements IChunkGenerator {
 
 	@Override
 	public List<Biome.SpawnListEntry> getPossibleCreatures(EnumCreatureType creatureType, BlockPos pos) {
-		return null;
+		if(Config.creatureSpawn){
+			Biome biome = this.world.getBiome(pos);
+			return biome.getSpawnableList(creatureType);
+		} else return null;
 	}
 
 	@Nullable
