@@ -23,7 +23,7 @@ public class VoidWorldProvider extends WorldProvider {
 
 	@Override
 	public boolean canRespawnHere() {
-		return false;
+		return Config.respawn;
 	}
 
 	@Override
@@ -67,5 +67,11 @@ public class VoidWorldProvider extends WorldProvider {
 		return super.calcSunriseSunsetColors(celestialAngle, partialTicks);
 	}
 
+
+	public int getRespawnDimension(net.minecraft.entity.player.EntityPlayerMP player)
+	{
+		if(Config.respawn) return Config.dimID;
+		else return 0;
+	}
 
 }

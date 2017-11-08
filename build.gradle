@@ -29,7 +29,15 @@ repositories {
     }
 }
 
-version = "1.3.0"
+
+repositories {
+    maven {
+        name = "Modmuss50"
+        url = "http://maven.modmuss50.me/"
+    }
+}
+
+version = "1.0.0"
 
 def ENV = System.getenv()
 if (ENV.BUILD_NUMBER) {
