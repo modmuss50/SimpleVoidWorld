@@ -12,6 +12,7 @@
 /.metadata
 /.settings
 /classpath
+/classes
 /dep
 
 Thumbs.db

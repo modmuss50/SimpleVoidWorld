@@ -1,0 +1,10 @@
+{
+  "id": "simplevoidworld",
+  "name": "Simple Void World",
+  "version": "1.0.0",
+  "side": "universal",
+  "initializer": "me.modmuss50.svw.SimpleVoidWorld",
+  "mixins":{
+    "common": "simplevoidworld.mixin.common.json"
+  }
+}
