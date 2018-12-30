@@ -8,7 +8,6 @@ import net.minecraft.util.math.BlockPos;
 public interface PlayerPlacementHandler {
 
 	/**
-	 *
 	 * This is used to create a portal if needed, as well as set the player location in the new dim
 	 *
 	 * when you return true no other placement handlers will be called when the player is moving
@@ -21,10 +20,10 @@ public interface PlayerPlacementHandler {
 	boolean placeInPortal(Entity entity, ServerWorld previousWorld, ServerWorld newWorld);
 
 	//TODO move out of this?
-	default void setEntityLocation(Entity entity, BlockPos pos){
+	default void setEntityLocation(Entity entity, BlockPos pos) {
 		if (entity instanceof ServerPlayerEntity) {
-			((ServerPlayerEntity)entity).networkHandler.method_14363(pos.getX(), pos.getY(), pos.getZ(), 0, 0);
-			((ServerPlayerEntity)entity).networkHandler.method_14372();
+			((ServerPlayerEntity) entity).networkHandler.method_14363(pos.getX(), pos.getY(), pos.getZ(), 0, 0);
+			((ServerPlayerEntity) entity).networkHandler.method_14372();
 		} else {
 			entity.setPositionAndAngles(pos.getX(), pos.getY(), pos.getZ(), 0, 0);
 		}

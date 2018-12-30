@@ -14,7 +14,6 @@ import net.minecraft.world.gen.chunk.ChunkGeneratorSettings;
 
 public class VoidChunkGenerator extends ChunkGenerator<ChunkGeneratorSettings> {
 
-
 	public VoidChunkGenerator(IWorld iWorld_1, BiomeSource biomeSource_1, ChunkGeneratorSettings chunkGeneratorSettings_1) {
 		super(iWorld_1, biomeSource_1, chunkGeneratorSettings_1);
 	}

@@ -1,7 +1,6 @@
 package me.modmuss50.svw.mixin;
 
 import me.modmuss50.api.DimAPI;
-import me.modmuss50.svw.SimpleVoidWorld;
 import net.minecraft.class_3689;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.world.SecondaryServerWorld;
@@ -24,21 +23,26 @@ import java.util.concurrent.ExecutorService;
 
 @Mixin(MinecraftServer.class)
 public abstract class MixinMinecraftServer {
-	@Shadow @Final private ExecutorService field_17200;
+	@Shadow
+	@Final
+	private ExecutorService field_17200;
 
-	@Shadow public abstract class_3689 getProfiler();
+	@Shadow
+	public abstract class_3689 getProfiler();
 
-	@Shadow public abstract ServerWorld getWorld(DimensionType dimensionType_1);
+	@Shadow
+	public abstract ServerWorld getWorld(DimensionType dimensionType_1);
 
-	@Shadow @Final private Map<DimensionType, ServerWorld> worlds;
-
+	@Shadow
+	@Final
+	private Map<DimensionType, ServerWorld> worlds;
 
 	@Inject(method = "createWorlds", at = @At("RETURN"))
 	private void createWorlds(WorldSaveHandler saveHandler, PersistentStateManager persistentStateManager, LevelProperties levelProperties, LevelInfo levelInfo, CallbackInfo info) {
-		for(DimensionType dimensionType : DimAPI.customDimenstions){
-			SecondaryServerWorld serverWorld = (new SecondaryServerWorld((MinecraftServer)(Object)this, field_17200, saveHandler, dimensionType, getWorld(DimensionType.OVERWORLD), getProfiler())).initializeAsSecondaryWorld();
+		for (DimensionType dimensionType : DimAPI.customDimenstions) {
+			SecondaryServerWorld serverWorld = (new SecondaryServerWorld((MinecraftServer) (Object) this, field_17200, saveHandler, dimensionType, getWorld(DimensionType.OVERWORLD), getProfiler())).initializeAsSecondaryWorld();
 			worlds.put(dimensionType, serverWorld);
-			serverWorld.registerListener(new ServerWorldListener((MinecraftServer)(Object)this, serverWorld));
+			serverWorld.registerListener(new ServerWorldListener((MinecraftServer) (Object) this, serverWorld));
 		}
 
 	}

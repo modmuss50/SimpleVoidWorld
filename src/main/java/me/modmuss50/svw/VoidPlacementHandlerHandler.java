@@ -17,7 +17,7 @@ public class VoidPlacementHandlerHandler implements PlayerPlacementHandler {
 		if (previousWorld.dimension.getType() == SimpleVoidWorld.VOID_WORLD) {
 			if (newWorld.dimension.getType() == DimensionType.OVERWORLD) {
 				BlockPos spawnLocation = getBedLocation((PlayerEntity) entity, newWorld);
-				if(spawnLocation == null){
+				if (spawnLocation == null) {
 					spawnLocation = newWorld.method_8395();
 				}
 
@@ -26,7 +26,7 @@ public class VoidPlacementHandlerHandler implements PlayerPlacementHandler {
 			}
 		}
 
-		if(newWorld.dimension.getType() == SimpleVoidWorld.VOID_WORLD){
+		if (newWorld.dimension.getType() == SimpleVoidWorld.VOID_WORLD) {
 			BlockPos spawnPos = new BlockPos(0, 100, 0);
 			spawnVoidPlatform(newWorld, spawnPos.down());
 			entity.setPositionAndAngles(spawnPos.getX(), spawnPos.getY(), spawnPos.getZ(), 0, 0);
@@ -36,7 +36,7 @@ public class VoidPlacementHandlerHandler implements PlayerPlacementHandler {
 		return false;
 	}
 
-	public void spawnVoidPlatform(World world, BlockPos pos){
+	public void spawnVoidPlatform(World world, BlockPos pos) {
 		if (world.getBlockState(pos).getBlock() != SimpleVoidWorld.PORTAL_BLOCK) {
 			BlockState platformBlock = SimpleVoidWorld.randomTerracotta();
 			for (int x = -3; x < 4; x++) {
@@ -48,8 +48,8 @@ public class VoidPlacementHandlerHandler implements PlayerPlacementHandler {
 				}
 			}
 			world.setBlockState(pos, SimpleVoidWorld.PORTAL_BLOCK.getDefaultState());
-			for(Direction facing : Direction.values()){
-				if(facing.getAxis().isHorizontal()){
+			for (Direction facing : Direction.values()) {
+				if (facing.getAxis().isHorizontal()) {
 					world.setBlockState(pos.up().offset(facing), Blocks.TORCH.getDefaultState());
 				}
 			}

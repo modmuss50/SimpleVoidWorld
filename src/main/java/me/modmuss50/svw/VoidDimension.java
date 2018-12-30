@@ -1,21 +1,15 @@
 package me.modmuss50.svw;
 
-import net.minecraft.sortme.structures.StructureManager;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biomes;
 import net.minecraft.world.biome.source.BiomeSourceType;
-import net.minecraft.world.biome.source.FixedBiomeSourceConfig;
-import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPos;
 import net.minecraft.world.dimension.Dimension;
 import net.minecraft.world.dimension.DimensionType;
-import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.chunk.ChunkGeneratorSettings;
-import net.minecraft.world.gen.chunk.ChunkGeneratorType;
 
 public class VoidDimension extends Dimension {
 	public VoidDimension(World world, DimensionType type) {
@@ -71,6 +65,5 @@ public class VoidDimension extends Dimension {
 	public BlockPos getForcedSpawnPoint() {
 		return new BlockPos(0, 100, 0);
 	}
-
 
 }
