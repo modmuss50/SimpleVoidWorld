@@ -18,7 +18,7 @@ public class VoidPlacementHandlerHandler implements PlayerPlacementHandler {
 			if (newWorld.dimension.getType() == DimensionType.OVERWORLD) {
 				BlockPos spawnLocation = getBedLocation((PlayerEntity) entity, newWorld);
 				if (spawnLocation == null) {
-					spawnLocation = newWorld.method_8395();
+					spawnLocation = newWorld.getSpawnPos();
 				}
 
 				setEntityLocation(entity, spawnLocation);

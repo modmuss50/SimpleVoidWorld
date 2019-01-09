@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(PlayerManager.class)
 public class MixinPlayerManager {
 
-	@Inject(method = "method_14558", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/Profiler;begin(Ljava/lang/String;)V", shift = At.Shift.BEFORE), cancellable = true)
+	@Inject(method = "method_14558", at = @At(value = "HEAD"), cancellable = true)
 	public void method_14558(Entity entity, DimensionType dimensionType, ServerWorld previousWorld, ServerWorld newWorld, CallbackInfo info) {
 		for (PlayerPlacementHandler playerPlacementHandler : DimAPI.playerPlacementHandlerList) {
 			if (playerPlacementHandler.placeInPortal(entity, previousWorld, newWorld)) {

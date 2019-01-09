@@ -13,7 +13,7 @@ import net.minecraft.item.block.BlockItem;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.dimension.DimensionType;
-import net.minecraft.world.gen.chunk.ChunkGeneratorSettings;
+import net.minecraft.world.gen.chunk.ChunkGeneratorConfig;
 import net.minecraft.world.gen.chunk.ChunkGeneratorType;
 
 import java.util.ArrayList;
@@ -34,14 +34,14 @@ public class SimpleVoidWorld implements ModInitializer {
 		}
 	});
 
-	public static ChunkGeneratorType<ChunkGeneratorSettings, VoidChunkGenerator> VOID_CHUNK_GENERATOR;
+	public static ChunkGeneratorType<ChunkGeneratorConfig, VoidChunkGenerator> VOID_CHUNK_GENERATOR;
 
 	@Override
 	public void onInitialize() {
 		initWorlds();
 		initBlocks();
 
-		SimpleVoidWorld.VOID_CHUNK_GENERATOR = new ChunkGeneratorTypeWorkaround().getChunkGeneratorType(ChunkGeneratorSettings::new);
+		SimpleVoidWorld.VOID_CHUNK_GENERATOR = new ChunkGeneratorTypeWorkaround().getChunkGeneratorType(ChunkGeneratorConfig::new);
 
 		DimAPI.playerPlacementHandlerList.add(new VoidPlacementHandlerHandler());
 		DimAPI.customDimenstions.add(VOID_WORLD);

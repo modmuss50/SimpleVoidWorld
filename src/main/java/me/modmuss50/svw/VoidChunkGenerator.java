@@ -1,7 +1,7 @@
 package me.modmuss50.svw;
 
-import net.minecraft.class_3233;
 import net.minecraft.sortme.structures.StructureManager;
+import net.minecraft.world.ChunkRegion;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biomes;
@@ -10,11 +10,11 @@ import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
-import net.minecraft.world.gen.chunk.ChunkGeneratorSettings;
+import net.minecraft.world.gen.chunk.ChunkGeneratorConfig;
 
-public class VoidChunkGenerator extends ChunkGenerator<ChunkGeneratorSettings> {
+public class VoidChunkGenerator extends ChunkGenerator<ChunkGeneratorConfig> {
 
-	public VoidChunkGenerator(IWorld iWorld_1, BiomeSource biomeSource_1, ChunkGeneratorSettings chunkGeneratorSettings_1) {
+	public VoidChunkGenerator(IWorld iWorld_1, BiomeSource biomeSource_1, ChunkGeneratorConfig chunkGeneratorSettings_1) {
 		super(iWorld_1, biomeSource_1, chunkGeneratorSettings_1);
 	}
 
@@ -24,9 +24,10 @@ public class VoidChunkGenerator extends ChunkGenerator<ChunkGeneratorSettings> {
 	}
 
 	@Override
-	public int method_12100() {
+	public int getSpawnHeight() {
 		return 64;
 	}
+
 
 	@Override
 	public void populateNoise(IWorld var1, Chunk var2) {
@@ -54,7 +55,7 @@ public class VoidChunkGenerator extends ChunkGenerator<ChunkGeneratorSettings> {
 	}
 
 	@Override
-	public void generateFeatures(class_3233 class_3233_1) {
+	public void generateFeatures(ChunkRegion class_3233_1) {
 
 	}
 

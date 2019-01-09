@@ -2,7 +2,7 @@ package me.modmuss50.svw;
 
 import net.minecraft.world.World;
 import net.minecraft.world.biome.source.BiomeSource;
-import net.minecraft.world.gen.chunk.ChunkGeneratorSettings;
+import net.minecraft.world.gen.chunk.ChunkGeneratorConfig;
 import net.minecraft.world.gen.chunk.ChunkGeneratorType;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -37,7 +37,7 @@ public class ChunkGeneratorTypeWorkaround implements InvocationHandler {
 			this);
 	}
 
-	public VoidChunkGenerator createProxy(World w, BiomeSource biomesource, ChunkGeneratorSettings gensettings) {
+	public VoidChunkGenerator createProxy(World w, BiomeSource biomesource, ChunkGeneratorConfig gensettings) {
 		return new VoidChunkGenerator(w, biomesource, gensettings);
 	}
 
@@ -46,17 +46,17 @@ public class ChunkGeneratorTypeWorkaround implements InvocationHandler {
 		if (args.length == 3 &&
 			args[0] instanceof World &&
 			args[1] instanceof BiomeSource &&
-			args[2] instanceof ChunkGeneratorSettings
+			args[2] instanceof ChunkGeneratorConfig
 		) {
 
 			return createProxy((World) args[0],
 				(BiomeSource) args[1],
-				(ChunkGeneratorSettings) args[2]);
+				(ChunkGeneratorConfig) args[2]);
 		}
 		throw (new UnsupportedOperationException("Unknown Method: " + method.toString()));
 	}
 
-	public ChunkGeneratorType getChunkGeneratorType(Supplier<ChunkGeneratorSettings> supplier) {
+	public ChunkGeneratorType getChunkGeneratorType(Supplier<ChunkGeneratorConfig> supplier) {
 		Constructor<?>[] initlst = ChunkGeneratorType.class.getDeclaredConstructors();
 		final Logger log = LogManager.getLogger("ChunkGenErr");
 
