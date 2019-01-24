@@ -3,7 +3,6 @@
   "package": "me.modmuss50.svw.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "MixinMinecraftServer",
     "MixinPlayerManager"
   ],
   "injectors": {

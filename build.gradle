@@ -34,10 +34,10 @@ if (ENV.BUILD_NUMBER) {
 }
 
 dependencies {
-    minecraft "com.mojang:minecraft:19w03c"
-    mappings "net.fabricmc:yarn:19w03c.6"
+    minecraft "com.mojang:minecraft:19w04a"
+    mappings "net.fabricmc:yarn:19w04a.1"
     modCompile "net.fabricmc:fabric-loader:0.3.3.101"
-    modCompile "net.fabricmc:fabric:0.1.4.78"
+    modCompile "net.fabricmc:fabric:0.1.4.79"
 }
 
 group = 'SimpleVoidWorld'

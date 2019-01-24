@@ -12,6 +12,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.dimension.DimensionType;
 
 public class VoidPlacementHandlerHandler implements PlayerPlacementHandler {
+
 	@Override
 	public boolean placeInPortal(Entity entity, ServerWorld previousWorld, ServerWorld newWorld) {
 		if (previousWorld.dimension.getType() == SimpleVoidWorld.VOID_WORLD) {

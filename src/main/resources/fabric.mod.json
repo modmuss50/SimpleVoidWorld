@@ -6,5 +6,8 @@
   "initializer": "me.modmuss50.svw.SimpleVoidWorld",
   "mixins":{
     "common": "simplevoidworld.mixin.common.json"
+  },
+  "requires": {
+    "fabric": "*"
   }
 }

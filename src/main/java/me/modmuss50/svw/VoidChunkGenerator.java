@@ -28,7 +28,6 @@ public class VoidChunkGenerator extends ChunkGenerator<ChunkGeneratorConfig> {
 		return 64;
 	}
 
-
 	@Override
 	public void populateNoise(IWorld var1, Chunk var2) {
 

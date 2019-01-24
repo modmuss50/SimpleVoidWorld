@@ -15,6 +15,7 @@ import java.util.function.Supplier;
 
 //Wee this is fun, thanks https://github.com/ezterry/ezwasteland/blob/4c4d825309e713bebbece2191900774e80dfb7b1/src/main/java/com/ezrol/terry/minecraft/wastelands/EzwastelandsFabric.java#L126
 public class ChunkGeneratorTypeWorkaround implements InvocationHandler {
+
 	private Object factoryProxy;
 	private Class factoryClass;
 
@@ -32,9 +33,7 @@ public class ChunkGeneratorTypeWorkaround implements InvocationHandler {
 				throw (new RuntimeException("Unable to find " + dev_name));
 			}
 		}
-		factoryProxy = Proxy.newProxyInstance(factoryClass.getClassLoader(),
-			new Class[] { factoryClass },
-			this);
+		factoryProxy = Proxy.newProxyInstance(factoryClass.getClassLoader(), new Class[]{factoryClass}, this);
 	}
 
 	public VoidChunkGenerator createProxy(World w, BiomeSource biomesource, ChunkGeneratorConfig gensettings) {
@@ -43,15 +42,9 @@ public class ChunkGeneratorTypeWorkaround implements InvocationHandler {
 
 	@Override
 	public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-		if (args.length == 3 &&
-			args[0] instanceof World &&
-			args[1] instanceof BiomeSource &&
-			args[2] instanceof ChunkGeneratorConfig
-		) {
+		if (args.length == 3 && args[0] instanceof World && args[1] instanceof BiomeSource && args[2] instanceof ChunkGeneratorConfig) {
 
-			return createProxy((World) args[0],
-				(BiomeSource) args[1],
-				(ChunkGeneratorConfig) args[2]);
+			return createProxy((World) args[0], (BiomeSource) args[1], (ChunkGeneratorConfig) args[2]);
 		}
 		throw (new UnsupportedOperationException("Unknown Method: " + method.toString()));
 	}

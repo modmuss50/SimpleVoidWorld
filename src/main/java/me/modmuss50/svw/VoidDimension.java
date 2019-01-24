@@ -12,6 +12,7 @@ import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.chunk.ChunkGeneratorConfig;
 
 public class VoidDimension extends Dimension {
+
 	public VoidDimension(World world, DimensionType type) {
 		super(world, type);
 	}

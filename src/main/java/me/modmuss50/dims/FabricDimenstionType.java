@@ -12,8 +12,7 @@ public class FabricDimenstionType extends DimensionType {
 
 	public int id;
 
-	public FabricDimenstionType(Identifier name, int id,
-	                            BiFunction<World, DimensionType, ? extends Dimension> factory) {
+	public FabricDimenstionType(Identifier name, int id, BiFunction<World, DimensionType, ? extends Dimension> factory) {
 		super(id, name.getNamespace() + "_" + name.getPath(), "DIM_" + name.getNamespace() + "_" + name.getPath(), factory, true);
 		this.id = id;
 		register(name);
