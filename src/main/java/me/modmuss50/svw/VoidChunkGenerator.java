@@ -40,7 +40,7 @@ public class VoidChunkGenerator extends ChunkGenerator<ChunkGeneratorConfig> {
 	}
 
 	@Override
-	public void method_16129(Chunk chunk_1, ChunkGenerator<?> chunkGenerator_1, StructureManager structureManager_1) {
+	public void setStructureStarts(Chunk chunk_1, ChunkGenerator<?> chunkGenerator_1, StructureManager structureManager_1) {
 
 	}
 

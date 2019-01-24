@@ -1,8 +1,8 @@
 package me.modmuss50.svw.mixin;
 
 import me.modmuss50.api.DimAPI;
-import net.minecraft.class_3949;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.WorldGenerationProgressListener;
 import net.minecraft.server.world.SecondaryServerWorld;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.server.world.ServerWorldListener;
@@ -39,7 +39,7 @@ public abstract class MixinMinecraftServer {
 	private Map<DimensionType, ServerWorld> worlds;
 
 	@Inject(method = "createWorlds", at = @At("RETURN"))
-	private void createWorlds(WorldSaveHandler saveHandler, PersistentStateManager persistentStateManager, LevelProperties levelProperties, LevelInfo levelInfo, class_3949 newClass, CallbackInfo info) {
+	private void createWorlds(WorldSaveHandler saveHandler, PersistentStateManager persistentStateManager, LevelProperties levelProperties, LevelInfo levelInfo, WorldGenerationProgressListener newClass, CallbackInfo info) {
 		for (DimensionType dimensionType : DimAPI.customDimenstions) {
 			SecondaryServerWorld serverWorld = (new SecondaryServerWorld((MinecraftServer) (Object) this, field_17200, saveHandler, dimensionType, getWorld(DimensionType.OVERWORLD), getProfiler(), newClass)).initializeAsSecondaryWorld();
 			worlds.put(dimensionType, serverWorld);

@@ -5,6 +5,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Material;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.BlockHitResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -18,7 +19,7 @@ public class BlockPortal extends Block {
 	}
 
 	@Override
-	public boolean activate(BlockState stateBlock, World world, BlockPos blockPos, PlayerEntity playerEntity, Hand hand, Direction facing, float v, float v1, float v2) {
+	public boolean activate(BlockState stateBlock, World world, BlockPos blockPos, PlayerEntity playerEntity, Hand hand, BlockHitResult blockHitResult) {
 		if (!world.isClient) {
 			if (playerEntity.dimension == SimpleVoidWorld.VOID_WORLD) {
 				playerEntity.changeDimension(DimensionType.OVERWORLD);

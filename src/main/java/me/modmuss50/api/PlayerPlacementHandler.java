@@ -22,8 +22,8 @@ public interface PlayerPlacementHandler {
 	//TODO move out of this?
 	default void setEntityLocation(Entity entity, BlockPos pos) {
 		if (entity instanceof ServerPlayerEntity) {
-			((ServerPlayerEntity) entity).networkHandler.method_14363(pos.getX(), pos.getY(), pos.getZ(), 0, 0);
-			((ServerPlayerEntity) entity).networkHandler.method_14372();
+			((ServerPlayerEntity) entity).networkHandler.teleportRequest(pos.getX(), pos.getY(), pos.getZ(), 0, 0);
+			((ServerPlayerEntity) entity).networkHandler.syncWithPlayerPosition();
 		} else {
 			entity.setPositionAndAngles(pos.getX(), pos.getY(), pos.getZ(), 0, 0);
 		}

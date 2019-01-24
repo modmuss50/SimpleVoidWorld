@@ -26,7 +26,7 @@ repositories {
 }
 
 
-version = "2.0.2"
+version = "2.0.3"
 
 def ENV = System.getenv()
 if (ENV.BUILD_NUMBER) {
@@ -34,10 +34,10 @@ if (ENV.BUILD_NUMBER) {
 }
 
 dependencies {
-    minecraft "com.mojang:minecraft:19w02a"
-    mappings "net.fabricmc:yarn:19w02a.12"
-    modCompile "net.fabricmc:fabric-loader:0.3.2.92"
-    modCompile "net.fabricmc:fabric:0.1.4.71"
+    minecraft "com.mojang:minecraft:19w03c"
+    mappings "net.fabricmc:yarn:19w03c.6"
+    modCompile "net.fabricmc:fabric-loader:0.3.3.101"
+    modCompile "net.fabricmc:fabric:0.1.4.78"
 }
 
 group = 'SimpleVoidWorld'
