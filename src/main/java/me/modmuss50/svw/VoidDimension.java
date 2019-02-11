@@ -23,12 +23,12 @@ public class VoidDimension extends Dimension {
 	}
 
 	@Override
-	public BlockPos method_12452(ChunkPos chunkPos, boolean b) {
+	public BlockPos getSpawningBlockInChunk(ChunkPos chunkPos, boolean b) {
 		return null;
 	}
 
 	@Override
-	public BlockPos method_12444(int i, int i1, boolean b) {
+	public BlockPos getTopSpawningBlockPosition(int i, int i1, boolean b) {
 		return null;
 	}
 
@@ -43,17 +43,17 @@ public class VoidDimension extends Dimension {
 	}
 
 	@Override
-	public Vec3d method_12445(float v, float v1) {
+	public Vec3d getFogColor(float v, float v1) {
 		return new Vec3d(0, 0, 0);
 	}
 
 	@Override
-	public boolean method_12448() {
+	public boolean canPlayersSleep() {
 		return false;
 	}
 
 	@Override
-	public boolean method_12453(int i, int i1) {
+	public boolean shouldRenderFog(int i, int i1) {
 		return false;
 	}
 

@@ -1,6 +1,6 @@
 package me.modmuss50.svw;
 
-import net.minecraft.sortme.structures.StructureManager;
+import net.minecraft.structure.StructureManager;
 import net.minecraft.world.ChunkRegion;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.biome.Biome;
