@@ -19,7 +19,7 @@ public class VoidDimension extends Dimension {
 
 	@Override
 	public ChunkGenerator<?> createChunkGenerator() {
-		return SimpleVoidWorld.VOID_CHUNK_GENERATOR.create(world, BiomeSourceType.FIXED.applyConfig(BiomeSourceType.FIXED.getConfig().method_8782(Biomes.PLAINS)), new ChunkGeneratorConfig());
+		return SimpleVoidWorld.VOID_CHUNK_GENERATOR.create(world, BiomeSourceType.FIXED.applyConfig(BiomeSourceType.FIXED.getConfig().setBiome(Biomes.PLAINS)), new ChunkGeneratorConfig());
 	}
 
 	@Override

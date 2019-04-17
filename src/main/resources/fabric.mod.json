@@ -1,13 +1,19 @@
 {
+  "schemaVersion": 1,
   "id": "simplevoidworld",
   "name": "Simple Void World",
   "version": "1.0.0",
-  "side": "universal",
-  "initializer": "me.modmuss50.svw.SimpleVoidWorld",
-  "mixins":{
-    "common": "simplevoidworld.mixin.common.json"
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "me.modmuss50.svw.SimpleVoidWorld"
+    ]
   },
+  "mixins": [
+    "simplevoidworld.mixin.common.json"
+  ],
   "requires": {
+    "fabricloader": ">=0.4.0",
     "fabric": "*"
   }
 }

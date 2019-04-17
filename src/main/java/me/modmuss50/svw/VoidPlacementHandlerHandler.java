@@ -1,43 +1,37 @@
 package me.modmuss50.svw;
 
-import me.modmuss50.api.PlayerPlacementHandler;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
-import net.minecraft.world.dimension.DimensionType;
 
-public class VoidPlacementHandlerHandler implements PlayerPlacementHandler {
+import java.util.HashSet;
 
-	@Override
-	public boolean placeInPortal(Entity entity, ServerWorld previousWorld, ServerWorld newWorld) {
-		if (previousWorld.dimension.getType() == SimpleVoidWorld.VOID_WORLD) {
-			if (newWorld.dimension.getType() == DimensionType.OVERWORLD) {
-				BlockPos spawnLocation = getBedLocation((PlayerEntity) entity, newWorld);
-				if (spawnLocation == null) {
-					spawnLocation = newWorld.getSpawnPos();
-				}
+public class VoidPlacementHandlerHandler  {
 
-				setEntityLocation(entity, spawnLocation);
-				return true;
-			}
-		}
-
+	public static void enterVoid(Entity entity, ServerWorld previousWorld, ServerWorld newWorld) {
 		if (newWorld.dimension.getType() == SimpleVoidWorld.VOID_WORLD) {
 			BlockPos spawnPos = new BlockPos(0, 100, 0);
 			spawnVoidPlatform(newWorld, spawnPos.down());
 			entity.setPositionAndAngles(spawnPos.getX(), spawnPos.getY(), spawnPos.getZ(), 0, 0);
-			return true;
 		}
-
-		return false;
 	}
 
-	public void spawnVoidPlatform(World world, BlockPos pos) {
+	public static void leaveVoid(Entity entity, ServerWorld previousWorld, ServerWorld newWorld){
+		BlockPos spawnLocation = getBedLocation((PlayerEntity) entity, newWorld);
+		if (spawnLocation == null) {
+			spawnLocation = newWorld.getSpawnPos();
+		}
+
+		setEntityLocation(entity, spawnLocation);
+	}
+
+	public static void spawnVoidPlatform(World world, BlockPos pos) {
 		if (world.getBlockState(pos).getBlock() != SimpleVoidWorld.PORTAL_BLOCK) {
 			BlockState platformBlock = SimpleVoidWorld.randomTerracotta();
 			for (int x = -3; x < 4; x++) {
@@ -66,5 +60,14 @@ public class VoidPlacementHandlerHandler implements PlayerPlacementHandler {
 		//method_7288 = getBedSpawn
 		BlockPos bedSpawnLocation = PlayerEntity.method_7288(world, bedLocation, false);
 		return bedSpawnLocation;
+	}
+
+	public static void setEntityLocation(Entity entity, BlockPos pos) {
+		if (entity instanceof ServerPlayerEntity) {
+			((ServerPlayerEntity) entity).networkHandler.teleportRequest(pos.getX(), pos.getY(), pos.getZ(), 0, 0, new HashSet<>());
+			((ServerPlayerEntity) entity).networkHandler.syncWithPlayerPosition();
+		} else {
+			entity.setPositionAndAngles(pos.getX(), pos.getY(), pos.getZ(), 0, 0);
+		}
 	}
 }

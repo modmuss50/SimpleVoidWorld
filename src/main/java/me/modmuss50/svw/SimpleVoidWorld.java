@@ -1,15 +1,14 @@
 package me.modmuss50.svw;
 
-import me.modmuss50.api.DimAPI;
 import me.modmuss50.dims.FabricDimenstionType;
 import me.modmuss50.svw.blocks.BlockPortal;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.minecraft.block.BlockState;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.block.BlockItem;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.dimension.DimensionType;
@@ -42,9 +41,6 @@ public class SimpleVoidWorld implements ModInitializer {
 		initBlocks();
 
 		SimpleVoidWorld.VOID_CHUNK_GENERATOR = new ChunkGeneratorTypeWorkaround().getChunkGeneratorType(ChunkGeneratorConfig::new);
-
-		DimAPI.playerPlacementHandlerList.add(new VoidPlacementHandlerHandler());
-		DimAPI.customDimenstions.add(VOID_WORLD);
 	}
 
 	public static void initWorlds() {

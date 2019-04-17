@@ -19,6 +19,6 @@ public class FabricDimenstionType extends DimensionType {
 	}
 
 	private DimensionType register(Identifier identifier) {
-		return Registry.set(Registry.DIMENSION, this.id, identifier.toString(), this);
+		return Registry.register(Registry.DIMENSION, this.id, identifier.toString(), this);
 	}
 }

@@ -3,7 +3,7 @@
   "package": "me.modmuss50.svw.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "MixinPlayerManager"
+    "MixinPortalForcer"
   ],
   "injectors": {
     "defaultRequire": 1
