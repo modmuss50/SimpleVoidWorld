@@ -17,7 +17,7 @@ public class MixinPortalForcer {
 
 	@Shadow @Final private ServerWorld world;
 
-	@Inject(method = "method_8653", at = @At("HEAD"), cancellable = true)
+	@Inject(method = "usePortal", at = @At("HEAD"), cancellable = true)
 	public void method_8653(Entity entity, float float_1, CallbackInfoReturnable<Boolean> infoReturnable) {
 		//If going to the void world
 		if(world.getDimension().getType() == SimpleVoidWorld.VOID_WORLD){

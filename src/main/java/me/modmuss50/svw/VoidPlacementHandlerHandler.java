@@ -8,9 +8,11 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 import java.util.HashSet;
+import java.util.Optional;
 
 public class VoidPlacementHandlerHandler  {
 
@@ -58,8 +60,12 @@ public class VoidPlacementHandlerHandler  {
 			return null;
 		}
 		//method_7288 = getBedSpawn
-		BlockPos bedSpawnLocation = PlayerEntity.method_7288(world, bedLocation, false);
-		return bedSpawnLocation;
+		Optional<Vec3d> bedSpawnLocation = PlayerEntity.method_7288(world, bedLocation, false);
+		BlockPos pos = null;
+		if(bedSpawnLocation.isPresent()){
+			pos = new BlockPos(bedSpawnLocation.get());
+		}
+		return pos;
 	}
 
 	public static void setEntityLocation(Entity entity, BlockPos pos) {

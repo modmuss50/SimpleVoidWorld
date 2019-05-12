@@ -1,6 +1,5 @@
 package me.modmuss50.svw;
 
-import me.modmuss50.dims.FabricDimenstionType;
 import me.modmuss50.svw.blocks.BlockPortal;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
@@ -44,7 +43,7 @@ public class SimpleVoidWorld implements ModInitializer {
 	}
 
 	public static void initWorlds() {
-		VOID_WORLD = new FabricDimenstionType(new Identifier("simplevoidworld", "void"), 5, VoidDimension::new);
+		VOID_WORLD = new DimensionTypeWrapper(new Identifier("simplevoidworld", "void"), 5, VoidDimension::new);
 	}
 
 	public void initBlocks() {
