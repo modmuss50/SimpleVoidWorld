@@ -16,23 +16,17 @@ import java.util.Optional;
 
 public class VoidPlacementHandler {
 
-	public static EntityPlacer ENTERING = (teleported, destination, portalDir, horizontalOffset, verticalOffset) -> {
-		if(destination.getDimension().getType() == SimpleVoidWorld.VOID_WORLD){
-			BlockPos pos = enterVoid(teleported, (ServerWorld) teleported.getEntityWorld(), destination);
-			return new BlockPattern.TeleportTarget(new Vec3d(pos), Vec3d.ZERO, 0);
-		}
-		return null;
+	public static final EntityPlacer ENTERING = (teleported, destination, portalDir, horizontalOffset, verticalOffset) -> {
+		BlockPos pos = enterVoid(teleported, (ServerWorld) teleported.getEntityWorld(), destination);
+		return new BlockPattern.TeleportTarget(new Vec3d(pos), Vec3d.ZERO, 0);
 	};
 
-	public static EntityPlacer LEAVING = (teleported, destination, portalDir, horizontalOffset, verticalOffset) -> {
-		if(teleported.getEntityWorld().getDimension().getType() == SimpleVoidWorld.VOID_WORLD){
-			BlockPos pos = leaveVoid(teleported, (ServerWorld) teleported.getEntityWorld(), destination);
-			return new BlockPattern.TeleportTarget(new Vec3d(pos), Vec3d.ZERO, 0);
-		}
-		return null;
+	public static final EntityPlacer LEAVING = (teleported, destination, portalDir, horizontalOffset, verticalOffset) -> {
+		BlockPos pos = leaveVoid(teleported, (ServerWorld) teleported.getEntityWorld(), destination);
+		return new BlockPattern.TeleportTarget(new Vec3d(pos), Vec3d.ZERO, 0);
 	};
 
-	public static BlockPos enterVoid(Entity entity, ServerWorld previousWorld, ServerWorld newWorld) {
+	private static BlockPos enterVoid(Entity entity, ServerWorld previousWorld, ServerWorld newWorld) {
 		BlockPos spawnPos = new BlockPos(0, 100, 0);
 		spawnVoidPlatform(newWorld, spawnPos.down());
 		entity.setPositionAndAngles(spawnPos.getX(), spawnPos.getY(), spawnPos.getZ(), 0, 0);
@@ -40,7 +34,7 @@ public class VoidPlacementHandler {
 		return spawnPos;
 	}
 
-	public static BlockPos leaveVoid(Entity entity, ServerWorld previousWorld, ServerWorld newWorld){
+	private static BlockPos leaveVoid(Entity entity, ServerWorld previousWorld, ServerWorld newWorld){
 		BlockPos spawnLocation = getBedLocation((PlayerEntity) entity, newWorld);
 		if (spawnLocation == null) {
 			spawnLocation = newWorld.getSpawnPos();
@@ -49,7 +43,7 @@ public class VoidPlacementHandler {
 		return spawnLocation;
 	}
 
-	public static void spawnVoidPlatform(World world, BlockPos pos) {
+	private static void spawnVoidPlatform(World world, BlockPos pos) {
 		if (world.getBlockState(pos).getBlock() != SimpleVoidWorld.PORTAL_BLOCK) {
 			BlockState platformBlock = SimpleVoidWorld.randomTerracotta();
 			for (int x = -3; x < 4; x++) {
@@ -70,7 +64,7 @@ public class VoidPlacementHandler {
 		}
 	}
 
-	public static BlockPos getBedLocation(PlayerEntity player, ServerWorld world) {
+	private static BlockPos getBedLocation(PlayerEntity player, ServerWorld world) {
 		BlockPos bedLocation = player.getSpawnPosition();
 		if (bedLocation == null) {
 			return null;
