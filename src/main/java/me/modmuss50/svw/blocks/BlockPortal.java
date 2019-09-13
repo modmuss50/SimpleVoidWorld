@@ -1,6 +1,8 @@
 package me.modmuss50.svw.blocks;
 
 import me.modmuss50.svw.SimpleVoidWorld;
+import me.modmuss50.svw.VoidPlacementHandler;
+import net.fabricmc.fabric.api.dimension.v1.FabricDimensions;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Material;
@@ -21,7 +23,7 @@ public class BlockPortal extends Block {
 	public boolean activate(BlockState stateBlock, World world, BlockPos blockPos, PlayerEntity playerEntity, Hand hand, BlockHitResult blockHitResult) {
 		if (!world.isClient) {
 			if (playerEntity.dimension == SimpleVoidWorld.VOID_WORLD) {
-				playerEntity.changeDimension(DimensionType.OVERWORLD);
+				FabricDimensions.teleport(playerEntity, DimensionType.OVERWORLD, VoidPlacementHandler.LEAVING);
 			} else {
 				playerEntity.changeDimension(SimpleVoidWorld.VOID_WORLD);
 			}

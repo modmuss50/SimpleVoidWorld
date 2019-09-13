@@ -9,9 +9,6 @@
       "me.modmuss50.svw.SimpleVoidWorld"
     ]
   },
-  "mixins": [
-    "simplevoidworld.mixin.common.json"
-  ],
   "requires": {
     "fabricloader": ">=0.4.0",
     "fabric": "*"

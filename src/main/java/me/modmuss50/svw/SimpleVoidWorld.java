@@ -3,6 +3,7 @@ package me.modmuss50.svw;
 import me.modmuss50.svw.blocks.BlockPortal;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
+import net.fabricmc.fabric.api.dimension.v1.FabricDimensionType;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -10,7 +11,6 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
-import net.minecraft.world.dimension.DimensionType;
 import net.minecraft.world.gen.chunk.ChunkGeneratorConfig;
 import net.minecraft.world.gen.chunk.ChunkGeneratorType;
 
@@ -21,7 +21,7 @@ import java.util.function.Supplier;
 
 public class SimpleVoidWorld implements ModInitializer {
 
-	public static DimensionType VOID_WORLD;
+	public static FabricDimensionType VOID_WORLD;
 
 	public static BlockPortal PORTAL_BLOCK;
 
@@ -43,15 +43,20 @@ public class SimpleVoidWorld implements ModInitializer {
 	}
 
 	public static void initWorlds() {
-		VOID_WORLD = new DimensionTypeWrapper(new Identifier("simplevoidworld", "void"), 5, VoidDimension::new);
+		VOID_WORLD = FabricDimensionType.builder()
+			.factory(VoidDimension::new)
+			.skyLight(true)
+			.defaultPlacer(VoidPlacementHandler.ENTERING)
+			.buildAndRegister(new Identifier("simplevoidworld", "void"));
+
 	}
 
 	public void initBlocks() {
 		PORTAL_BLOCK = new BlockPortal();
 		Registry.register(Registry.BLOCK, new Identifier("simplevoidworld", "void_portal"), PORTAL_BLOCK);
 
-		BlockItem blockItem = new BlockItem(PORTAL_BLOCK, new Item.Settings().itemGroup(SVW_GROUP));
-		blockItem.registerBlockItemMap(Item.BLOCK_ITEM_MAP, blockItem);
+		BlockItem blockItem = new BlockItem(PORTAL_BLOCK, new Item.Settings().group(SVW_GROUP));
+		blockItem.appendBlocks(Item.BLOCK_ITEMS, blockItem);
 
 		Registry.register(Registry.ITEM, new Identifier("simplevoidworld", "void_portal"), blockItem);
 	}
