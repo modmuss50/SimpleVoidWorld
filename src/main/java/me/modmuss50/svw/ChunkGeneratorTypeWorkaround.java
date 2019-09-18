@@ -1,7 +1,9 @@
 package me.modmuss50.svw;
 
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.source.BiomeSource;
+import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.chunk.ChunkGeneratorConfig;
 import net.minecraft.world.gen.chunk.ChunkGeneratorType;
 import org.apache.logging.log4j.LogManager;
@@ -20,18 +22,12 @@ public class ChunkGeneratorTypeWorkaround implements InvocationHandler {
 	private Class factoryClass;
 
 	public ChunkGeneratorTypeWorkaround() {
-		//reflection hack, dev = mapped in dev enviroment, prod = intermediate value
-		String dev_name = "net.minecraft.world.gen.chunk.ChunkGeneratorFactory";
-		String prod_name = "net.minecraft.class_2801";
+		String className = FabricLoader.getInstance().getMappingResolver().mapClassName("intermediary", "net.minecraft.class_2801");
 
 		try {
-			factoryClass = Class.forName(dev_name);
+			factoryClass = Class.forName(className);
 		} catch (ClassNotFoundException e1) {
-			try {
-				factoryClass = Class.forName(prod_name);
-			} catch (ClassNotFoundException e2) {
-				throw (new RuntimeException("Unable to find " + dev_name));
-			}
+			throw (new RuntimeException("Unable to find " + className, e1));
 		}
 		factoryProxy = Proxy.newProxyInstance(factoryClass.getClassLoader(), new Class[]{factoryClass}, this);
 	}
@@ -41,7 +37,7 @@ public class ChunkGeneratorTypeWorkaround implements InvocationHandler {
 	}
 
 	@Override
-	public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+	public Object invoke(Object proxy, Method method, Object[] args) {
 		if (args.length == 3 && args[0] instanceof World && args[1] instanceof BiomeSource && args[2] instanceof ChunkGeneratorConfig) {
 
 			return createProxy((World) args[0], (BiomeSource) args[1], (ChunkGeneratorConfig) args[2]);
@@ -49,7 +45,7 @@ public class ChunkGeneratorTypeWorkaround implements InvocationHandler {
 		throw (new UnsupportedOperationException("Unknown Method: " + method.toString()));
 	}
 
-	public ChunkGeneratorType getChunkGeneratorType(Supplier<ChunkGeneratorConfig> supplier) {
+	public <C extends ChunkGeneratorConfig, T extends ChunkGenerator<C>> ChunkGeneratorType<C, T> getChunkGeneratorType(Supplier<C> supplier) {
 		Constructor<?>[] initlst = ChunkGeneratorType.class.getDeclaredConstructors();
 		final Logger log = LogManager.getLogger("ChunkGenErr");
 
@@ -60,7 +56,7 @@ public class ChunkGeneratorTypeWorkaround implements InvocationHandler {
 			}
 			//lets try it
 			try {
-				return (ChunkGeneratorType) init.newInstance(factoryProxy, true, supplier);
+				return (ChunkGeneratorType<C, T>) init.newInstance(factoryProxy, true, supplier);
 			} catch (Exception e) {
 				log.error("Error in calling Chunk Generator Type", e);
 			}

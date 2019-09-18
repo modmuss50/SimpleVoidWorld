@@ -1,7 +1,5 @@
-package me.modmuss50.svw.blocks;
+package me.modmuss50.svw;
 
-import me.modmuss50.svw.SimpleVoidWorld;
-import me.modmuss50.svw.VoidPlacementHandler;
 import net.fabricmc.fabric.api.dimension.v1.FabricDimensions;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

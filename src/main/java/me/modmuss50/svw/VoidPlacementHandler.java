@@ -34,7 +34,7 @@ public class VoidPlacementHandler {
 		return spawnPos;
 	}
 
-	private static BlockPos leaveVoid(Entity entity, ServerWorld previousWorld, ServerWorld newWorld){
+	private static BlockPos leaveVoid(Entity entity, ServerWorld previousWorld, ServerWorld newWorld) {
 		BlockPos spawnLocation = getBedLocation((PlayerEntity) entity, newWorld);
 		if (spawnLocation == null) {
 			spawnLocation = newWorld.getSpawnPos();
@@ -72,7 +72,7 @@ public class VoidPlacementHandler {
 		//method_7288 = getBedSpawn
 		Optional<Vec3d> bedSpawnLocation = PlayerEntity.method_7288(world, bedLocation, false);
 		BlockPos pos = null;
-		if(bedSpawnLocation.isPresent()){
+		if (bedSpawnLocation.isPresent()) {
 			pos = new BlockPos(bedSpawnLocation.get());
 		}
 		return pos;

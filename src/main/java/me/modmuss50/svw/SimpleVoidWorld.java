@@ -1,6 +1,5 @@
 package me.modmuss50.svw;
 
-import me.modmuss50.svw.blocks.BlockPortal;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.fabricmc.fabric.api.dimension.v1.FabricDimensionType;
@@ -43,11 +42,7 @@ public class SimpleVoidWorld implements ModInitializer {
 	}
 
 	public static void initWorlds() {
-		VOID_WORLD = FabricDimensionType.builder()
-			.factory(VoidDimension::new)
-			.skyLight(true)
-			.defaultPlacer(VoidPlacementHandler.ENTERING)
-			.buildAndRegister(new Identifier("simplevoidworld", "void"));
+		VOID_WORLD = FabricDimensionType.builder().factory(VoidDimension::new).skyLight(true).defaultPlacer(VoidPlacementHandler.ENTERING).buildAndRegister(new Identifier("simplevoidworld", "void"));
 
 	}
 
@@ -65,8 +60,6 @@ public class SimpleVoidWorld implements ModInitializer {
 		Random random = new Random();
 
 		List<BlockState> terracottaBlocks = new ArrayList<>();
-
-		//TODO use tags for this?!
 		Registry.BLOCK.forEach(block -> {
 			if (Registry.BLOCK.getId(block).getPath().endsWith("_terracotta") && !Registry.BLOCK.getId(block).getPath().endsWith("_glazed_terracotta")) {
 				terracottaBlocks.add(block.getDefaultState());
