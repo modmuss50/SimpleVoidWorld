@@ -3,6 +3,7 @@ package me.modmuss50.svw;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.fabricmc.fabric.api.dimension.v1.FabricDimensionType;
+import net.fabricmc.fabric.api.world.FabricChunkGeneratorType;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -38,7 +39,7 @@ public class SimpleVoidWorld implements ModInitializer {
 		initWorlds();
 		initBlocks();
 
-		SimpleVoidWorld.VOID_CHUNK_GENERATOR = new ChunkGeneratorTypeWorkaround().getChunkGeneratorType(ChunkGeneratorConfig::new);
+		SimpleVoidWorld.VOID_CHUNK_GENERATOR = FabricChunkGeneratorType.register("simplevoidworld", VoidChunkGenerator::new, ChunkGeneratorConfig::new, false);
 	}
 
 	public static void initWorlds() {
