@@ -9,7 +9,6 @@ import net.minecraft.world.biome.source.BiomeSourceType;
 import net.minecraft.world.dimension.Dimension;
 import net.minecraft.world.dimension.DimensionType;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
-import net.minecraft.world.gen.chunk.ChunkGeneratorConfig;
 
 public class VoidDimension extends Dimension {
 
@@ -19,7 +18,7 @@ public class VoidDimension extends Dimension {
 
 	@Override
 	public ChunkGenerator<?> createChunkGenerator() {
-		return SimpleVoidWorld.VOID_CHUNK_GENERATOR.create(world, BiomeSourceType.FIXED.applyConfig(BiomeSourceType.FIXED.getConfig().setBiome(Biomes.PLAINS)), new ChunkGeneratorConfig());
+		return SimpleVoidWorld.VOID_CHUNK_GENERATOR.create(world, BiomeSourceType.FIXED.applyConfig(BiomeSourceType.FIXED.getConfig().setBiome(Biomes.PLAINS)), SimpleVoidWorld.VOID_CHUNK_GENERATOR.createSettings());
 	}
 
 	@Override
