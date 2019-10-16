@@ -27,7 +27,7 @@ repositories {
 }
 
 
-version = "2.0.6"
+version = "3.0.0"
 
 def ENV = System.getenv()
 if (ENV.BUILD_NUMBER) {
@@ -41,11 +41,6 @@ dependencies {
 
 	//Fabric api
 	modCompile "net.fabricmc.fabric-api:fabric-api:0.3.3+build.234-1.14"
-	
-	//Pull in the locally build version
-	modCompile ("net.fabricmc.fabric-api:fabric-world-v1:0.1.0+") {
-		transitive = false
-	}
 }
 
 group = 'SimpleVoidWorld'
