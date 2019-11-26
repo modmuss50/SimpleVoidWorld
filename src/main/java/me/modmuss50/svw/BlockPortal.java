@@ -5,6 +5,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Material;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
@@ -18,7 +19,7 @@ public class BlockPortal extends Block {
 	}
 
 	@Override
-	public boolean activate(BlockState stateBlock, World world, BlockPos blockPos, PlayerEntity playerEntity, Hand hand, BlockHitResult blockHitResult) {
+	public ActionResult onUse(BlockState stateBlock, World world, BlockPos blockPos, PlayerEntity playerEntity, Hand hand, BlockHitResult blockHitResult) {
 		if (!world.isClient) {
 			if (playerEntity.dimension == SimpleVoidWorld.VOID_WORLD) {
 				FabricDimensions.teleport(playerEntity, DimensionType.OVERWORLD, VoidPlacementHandler.LEAVING);
@@ -26,6 +27,6 @@ public class BlockPortal extends Block {
 				playerEntity.changeDimension(SimpleVoidWorld.VOID_WORLD);
 			}
 		}
-		return true;
+		return ActionResult.SUCCESS;
 	}
 }

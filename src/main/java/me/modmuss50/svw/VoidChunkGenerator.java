@@ -14,12 +14,12 @@ import net.minecraft.world.gen.chunk.ChunkGeneratorConfig;
 
 public class VoidChunkGenerator extends ChunkGenerator<ChunkGeneratorConfig> {
 
-	public VoidChunkGenerator(IWorld iWorld_1, BiomeSource biomeSource_1, ChunkGeneratorConfig chunkGeneratorSettings_1) {
-		super(iWorld_1, biomeSource_1, chunkGeneratorSettings_1);
+	public VoidChunkGenerator(IWorld world, BiomeSource biomeSource, ChunkGeneratorConfig chunkGeneratorConfig) {
+		super(world, biomeSource, chunkGeneratorConfig);
 	}
 
 	@Override
-	public void buildSurface(Chunk var1) {
+	public void buildSurface(ChunkRegion chunkRegion, Chunk chunk) {
 
 	}
 
@@ -36,21 +36,6 @@ public class VoidChunkGenerator extends ChunkGenerator<ChunkGeneratorConfig> {
 	@Override
 	public int getHeightOnGround(int i, int i1, Heightmap.Type type) {
 		return 0;
-	}
-
-	@Override
-	public void setStructureStarts(Chunk chunk_1, ChunkGenerator<?> chunkGenerator_1, StructureManager structureManager_1) {
-
-	}
-
-	@Override
-	public void carve(Chunk chunk_1, GenerationStep.Carver generationStep$Carver_1) {
-
-	}
-
-	@Override
-	protected Biome getDecorationBiome(Chunk chunk_1) {
-		return Biomes.PLAINS;
 	}
 
 	@Override

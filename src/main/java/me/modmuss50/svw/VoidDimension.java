@@ -12,13 +12,17 @@ import net.minecraft.world.gen.chunk.ChunkGenerator;
 
 public class VoidDimension extends Dimension {
 
+
 	public VoidDimension(World world, DimensionType type) {
-		super(world, type);
+		super(world, type, 0.0F);
 	}
 
 	@Override
 	public ChunkGenerator<?> createChunkGenerator() {
-		return SimpleVoidWorld.VOID_CHUNK_GENERATOR.create(world, BiomeSourceType.FIXED.applyConfig(BiomeSourceType.FIXED.getConfig().setBiome(Biomes.PLAINS)), SimpleVoidWorld.VOID_CHUNK_GENERATOR.createSettings());
+		return SimpleVoidWorld.VOID_CHUNK_GENERATOR.create(world,
+				BiomeSourceType.FIXED.applyConfig(BiomeSourceType.FIXED.getConfig(world.getLevelProperties())
+						.setBiome(Biomes.PLAINS)),
+				SimpleVoidWorld.VOID_CHUNK_GENERATOR.createSettings());
 	}
 
 	@Override
@@ -52,7 +56,7 @@ public class VoidDimension extends Dimension {
 	}
 
 	@Override
-	public boolean shouldRenderFog(int i, int i1) {
+	public boolean isFogThick(int x, int z) {
 		return false;
 	}
 

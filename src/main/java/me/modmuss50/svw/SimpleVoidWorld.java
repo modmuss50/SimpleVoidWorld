@@ -42,8 +42,11 @@ public class SimpleVoidWorld implements ModInitializer {
 	}
 
 	public static void initWorlds() {
-		VOID_WORLD = FabricDimensionType.builder().factory(VoidDimension::new).skyLight(true).defaultPlacer(VoidPlacementHandler.ENTERING).buildAndRegister(new Identifier("simplevoidworld", "void"));
-
+		VOID_WORLD = FabricDimensionType.builder()
+				.factory(VoidDimension::new)
+				.skyLight(true)
+				.defaultPlacer(VoidPlacementHandler.ENTERING)
+				.buildAndRegister(new Identifier("simplevoidworld", "void"));
 	}
 
 	public void initBlocks() {
