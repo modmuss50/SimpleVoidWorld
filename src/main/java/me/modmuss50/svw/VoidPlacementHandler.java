@@ -29,7 +29,7 @@ public class VoidPlacementHandler {
 	private static BlockPos enterVoid(Entity entity, ServerWorld previousWorld, ServerWorld newWorld) {
 		BlockPos spawnPos = new BlockPos(0, 100, 0);
 		spawnVoidPlatform(newWorld, spawnPos.down());
-		entity.setPositionAndAngles(spawnPos.getX(), spawnPos.getY(), spawnPos.getZ(), 0, 0);
+		entity.refreshPositionAndAngles(spawnPos.getX(), spawnPos.getY(), spawnPos.getZ(), 0, 0);
 
 		return spawnPos;
 	}
@@ -70,7 +70,7 @@ public class VoidPlacementHandler {
 			return null;
 		}
 		//method_7288 = getBedSpawn
-		Optional<Vec3d> bedSpawnLocation = PlayerEntity.method_7288(world, bedLocation, false);
+		Optional<Vec3d> bedSpawnLocation = PlayerEntity.findRespawnPosition(world, bedLocation, false);
 		BlockPos pos = null;
 		if (bedSpawnLocation.isPresent()) {
 			pos = new BlockPos(bedSpawnLocation.get());

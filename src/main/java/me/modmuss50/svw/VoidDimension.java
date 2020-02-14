@@ -46,7 +46,7 @@ public class VoidDimension extends Dimension {
 	}
 
 	@Override
-	public Vec3d getFogColor(float v, float v1) {
+	public Vec3d modifyFogColor(int fogColor, float tickDelta) {
 		return new Vec3d(0, 0, 0);
 	}
 
