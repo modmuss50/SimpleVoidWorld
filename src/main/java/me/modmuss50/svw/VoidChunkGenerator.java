@@ -1,46 +1,71 @@
 package me.modmuss50.svw;
 
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.block.BlockState;
 import net.minecraft.structure.StructureManager;
+import net.minecraft.world.BlockView;
 import net.minecraft.world.ChunkRegion;
 import net.minecraft.world.Heightmap;
-import net.minecraft.world.IWorld;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.Biomes;
+import net.minecraft.world.WorldAccess;
 import net.minecraft.world.biome.source.BiomeSource;
 import net.minecraft.world.chunk.Chunk;
-import net.minecraft.world.gen.GenerationStep;
+import net.minecraft.world.gen.StructureAccessor;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
-import net.minecraft.world.gen.chunk.ChunkGeneratorConfig;
+import net.minecraft.world.gen.chunk.StructuresConfig;
+import net.minecraft.world.gen.chunk.VerticalBlockSample;
 
-public class VoidChunkGenerator extends ChunkGenerator<ChunkGeneratorConfig> {
+import java.util.Collections;
+import java.util.Optional;
 
-	public VoidChunkGenerator(IWorld world, BiomeSource biomeSource, ChunkGeneratorConfig chunkGeneratorConfig) {
-		super(world, biomeSource, chunkGeneratorConfig);
+public class VoidChunkGenerator extends ChunkGenerator {
+
+	public static final Codec<VoidChunkGenerator> CODEC = RecordCodecBuilder.create((instance) ->
+			instance.group(
+					BiomeSource.field_24713.fieldOf("biome_source")
+							.forGetter((generator) -> generator.biomeSource)
+			).apply(instance, instance.stable(VoidChunkGenerator::new))
+	);
+
+	public VoidChunkGenerator(BiomeSource biomeSource) {
+		super(biomeSource, new StructuresConfig(Optional.empty(), Collections.emptyMap()));
 	}
 
 	@Override
-	public void buildSurface(ChunkRegion chunkRegion, Chunk chunk) {
+	protected Codec<? extends ChunkGenerator> method_28506() {
+		return CODEC;
+	}
+
+	@Override
+	public ChunkGenerator withSeed(long seed) {
+		return this;
+	}
+
+	@Override
+	public void buildSurface(ChunkRegion region, Chunk chunk) {
+	}
+
+	@Override
+	public void populateNoise(WorldAccess world, StructureAccessor accessor, Chunk chunk) {
+	}
+
+	@Override
+	public void setStructureStarts(StructureAccessor structureAccessor, Chunk chunk, StructureManager structureManager, long l) {
 
 	}
 
 	@Override
-	public int getSpawnHeight() {
-		return 64;
-	}
-
-	@Override
-	public void populateNoise(IWorld var1, Chunk var2) {
+	public void addStructureReferences(WorldAccess world, StructureAccessor accessor, Chunk chunk) {
 
 	}
 
 	@Override
-	public int getHeightOnGround(int i, int i1, Heightmap.Type type) {
+	public int getHeight(int x, int z, Heightmap.Type heightmapType) {
 		return 0;
 	}
 
 	@Override
-	public void generateFeatures(ChunkRegion class_3233_1) {
-
+	public BlockView getColumnSample(int x, int z) {
+		return new VerticalBlockSample(new BlockState[0]);
 	}
-
 }

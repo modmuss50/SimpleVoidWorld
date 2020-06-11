@@ -5,6 +5,8 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Material;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.server.world.ServerWorld;
+import net.minecraft.text.LiteralText;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
@@ -21,10 +23,16 @@ public class BlockPortal extends Block {
 	@Override
 	public ActionResult onUse(BlockState stateBlock, World world, BlockPos blockPos, PlayerEntity playerEntity, Hand hand, BlockHitResult blockHitResult) {
 		if (!world.isClient) {
-			if (playerEntity.dimension == SimpleVoidWorld.VOID_WORLD) {
-				FabricDimensions.teleport(playerEntity, DimensionType.OVERWORLD, VoidPlacementHandler.LEAVING);
+			ServerWorld serverWorld = (ServerWorld) playerEntity.getEntityWorld();
+			if (serverWorld.getRegistryKey() == SimpleVoidWorld.VOID_WORLD) {
+				FabricDimensions.teleport(playerEntity, serverWorld.getServer().getWorld(World.OVERWORLD), VoidPlacementHandler.leave(blockPos));
 			} else {
-				playerEntity.changeDimension(SimpleVoidWorld.VOID_WORLD);
+				ServerWorld voidWorld = serverWorld.getServer().getWorld(SimpleVoidWorld.VOID_WORLD);
+				if (voidWorld == null) {
+					playerEntity.sendMessage(new LiteralText("Failed to find void world, was it registered?"), false);
+					return ActionResult.FAIL;
+				}
+				FabricDimensions.teleport(playerEntity, voidWorld, VoidPlacementHandler.enter(blockPos));
 			}
 		}
 		return ActionResult.SUCCESS;

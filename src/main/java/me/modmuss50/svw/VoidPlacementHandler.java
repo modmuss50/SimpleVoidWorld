@@ -5,42 +5,38 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.pattern.BlockPattern;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.Heightmap;
 import net.minecraft.world.World;
 
-import java.util.Optional;
 
+@SuppressWarnings("deprecation")
 public class VoidPlacementHandler {
+	public static EntityPlacer enter(final BlockPos portalPos) {
+		return (entity, destination, direction, v, v1) -> {
+			BlockPos pos = enterVoid(entity, destination, portalPos);
+			return new BlockPattern.TeleportTarget(Vec3d.of(pos).add(0.5, 0, 0.5), Vec3d.ZERO, 0);
+		};
+	}
 
-	public static final EntityPlacer ENTERING = (teleported, destination, portalDir, horizontalOffset, verticalOffset) -> {
-		BlockPos pos = enterVoid(teleported, (ServerWorld) teleported.getEntityWorld(), destination);
-		return new BlockPattern.TeleportTarget(new Vec3d(pos), Vec3d.ZERO, 0);
-	};
+	public static EntityPlacer leave(final BlockPos portalPos) {
+		return (entity, destination, direction, v, v1) -> {
+			BlockPos pos = leaveVoid(entity, destination, portalPos);
+			return new BlockPattern.TeleportTarget(Vec3d.of(pos).add(0.5, 0, 0.5), Vec3d.ZERO, 0);
+		};
+	}
 
-	public static final EntityPlacer LEAVING = (teleported, destination, portalDir, horizontalOffset, verticalOffset) -> {
-		BlockPos pos = leaveVoid(teleported, (ServerWorld) teleported.getEntityWorld(), destination);
-		return new BlockPattern.TeleportTarget(new Vec3d(pos), Vec3d.ZERO, 0);
-	};
-
-	private static BlockPos enterVoid(Entity entity, ServerWorld previousWorld, ServerWorld newWorld) {
-		BlockPos spawnPos = new BlockPos(0, 100, 0);
+	private static BlockPos enterVoid(Entity entity, ServerWorld newWorld, BlockPos portalPos) {
+		BlockPos spawnPos = new BlockPos(portalPos.getX(), 100, portalPos.getZ());
 		spawnVoidPlatform(newWorld, spawnPos.down());
-		entity.refreshPositionAndAngles(spawnPos.getX(), spawnPos.getY(), spawnPos.getZ(), 0, 0);
-
 		return spawnPos;
 	}
 
-	private static BlockPos leaveVoid(Entity entity, ServerWorld previousWorld, ServerWorld newWorld) {
-		BlockPos spawnLocation = getBedLocation((PlayerEntity) entity, newWorld);
-		if (spawnLocation == null) {
-			spawnLocation = newWorld.getSpawnPos();
-		}
-
-		return spawnLocation;
+	private static BlockPos leaveVoid(Entity entity, ServerWorld newWorld, BlockPos portalPos) {
+		return newWorld.getTopPosition(Heightmap.Type.MOTION_BLOCKING, portalPos).up();
 	}
 
 	private static void spawnVoidPlatform(World world, BlockPos pos) {
@@ -63,19 +59,4 @@ public class VoidPlacementHandler {
 
 		}
 	}
-
-	private static BlockPos getBedLocation(PlayerEntity player, ServerWorld world) {
-		BlockPos bedLocation = player.getSpawnPosition();
-		if (bedLocation == null) {
-			return null;
-		}
-		//method_7288 = getBedSpawn
-		Optional<Vec3d> bedSpawnLocation = PlayerEntity.findRespawnPosition(world, bedLocation, false);
-		BlockPos pos = null;
-		if (bedSpawnLocation.isPresent()) {
-			pos = new BlockPos(bedSpawnLocation.get());
-		}
-		return pos;
-	}
-
 }

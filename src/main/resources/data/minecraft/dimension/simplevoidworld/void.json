@@ -1,0 +1,10 @@
+{
+  "generator": {
+    "type": "simplevoidworld:void",
+    "biome_source": {
+      "type": "minecraft:fixed",
+      "biome": "minecraft:plains"
+    }
+  },
+  "type": "simplevoidworld:void_type"
+}
