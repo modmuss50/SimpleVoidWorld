@@ -1,5 +1,5 @@
-name: Build
-on: [push, pull_request]
+name: Release
+on: [tag]
 jobs:
   build:
     runs-on: ubuntu-20.04
@@ -11,7 +11,9 @@ jobs:
       - uses: eskatos/gradle-command-action@v1
         with:
           gradle-version: wrapper
-          arguments: build
+          arguments: build curseforge
+          env:
+            - CURSE_API_KEY: ${{ secrets.CURSE_API_KEY }}
       - uses: actions/upload-artifact@v2
         with:
           name: Artifacts
