@@ -30,12 +30,12 @@ version = getVersionName()
 logger.lifecycle("Version = " + version)
 
 dependencies {
-    minecraft "com.mojang:minecraft:1.16-rc1"
-    mappings "net.fabricmc:yarn:1.16-rc1+build.4:v2"
+    minecraft "com.mojang:minecraft:1.16.1"
+    mappings "net.fabricmc:yarn:1.16.1+build.5:v2"
     modImplementation "net.fabricmc:fabric-loader:0.8.8+build.202"
 
     //Fabric api
-    modImplementation "net.fabricmc.fabric-api:fabric-api:0.12.5+build.367-1.16"
+    modImplementation "net.fabricmc.fabric-api:fabric-api:0.13.1+build.370-1.16"
 }
 
 group = 'SimpleVoidWorld'
@@ -48,7 +48,7 @@ curseforge {
         id = '254466'
         changelog = 'A changelog can be found at https://github.com/modmuss50/SimpleVoidWorld'
         releaseType = 'release'
-        addGameVersion '1.16-Snapshot'
+        addGameVersion '1.16.1'
         addGameVersion 'Fabric'
         mainArtifact(file("${project.buildDir}/libs/${archivesBaseName}-${version}.jar"))
         afterEvaluate {
