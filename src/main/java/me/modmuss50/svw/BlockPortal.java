@@ -24,14 +24,15 @@ public class BlockPortal extends Block {
 		if (!world.isClient) {
 			ServerWorld serverWorld = (ServerWorld) playerEntity.getEntityWorld();
 			if (serverWorld.getRegistryKey() == SimpleVoidWorld.VOID_WORLD) {
-				FabricDimensions.teleport(playerEntity, serverWorld.getServer().getWorld(World.OVERWORLD), VoidPlacementHandler.leave(blockPos));
+				ServerWorld overworld = serverWorld.getServer().getWorld(World.OVERWORLD);
+				FabricDimensions.teleport(playerEntity, overworld, VoidPlacementHandler.leave(overworld, blockPos));
 			} else {
 				ServerWorld voidWorld = serverWorld.getServer().getWorld(SimpleVoidWorld.VOID_WORLD);
 				if (voidWorld == null) {
 					playerEntity.sendMessage(new LiteralText("Failed to find void world, was it registered?"), false);
 					return ActionResult.FAIL;
 				}
-				FabricDimensions.teleport(playerEntity, voidWorld, VoidPlacementHandler.enter(blockPos));
+				FabricDimensions.teleport(playerEntity, voidWorld, VoidPlacementHandler.enter(voidWorld, blockPos));
 			}
 		}
 		return ActionResult.SUCCESS;

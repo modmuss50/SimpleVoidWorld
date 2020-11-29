@@ -1,6 +1,6 @@
 plugins {
     id 'java'
-    id 'fabric-loom' version '0.4-SNAPSHOT'
+    id 'fabric-loom' version '0.5-SNAPSHOT'
     id 'com.matthewprenger.cursegradle' version "1.4.0"
 }
 
@@ -30,15 +30,24 @@ version = getVersionName()
 logger.lifecycle("Version = " + version)
 
 dependencies {
-    minecraft "com.mojang:minecraft:1.16.1"
-    mappings "net.fabricmc:yarn:1.16.1+build.5:v2"
-    modImplementation "net.fabricmc:fabric-loader:0.8.8+build.202"
+    minecraft "com.mojang:minecraft:1.16.4"
+    mappings "net.fabricmc:yarn:1.16.4+build.7:v2"
+    modImplementation "net.fabricmc:fabric-loader:0.10.8"
 
     //Fabric api
-    modImplementation "net.fabricmc.fabric-api:fabric-api:0.13.1+build.370-1.16"
+    modImplementation "net.fabricmc.fabric-api:fabric-api:0.27.1+1.16"
 }
 
 group = 'SimpleVoidWorld'
+
+tasks.withType(JavaCompile).configureEach {
+    it.options.encoding = "UTF-8"
+
+    def targetVersion = 8
+    if (JavaVersion.current().isJava9Compatible()) {
+        it.options.release = targetVersion
+    }
+}
 
 curseforge {
     if (ENV.CURSE_API_KEY) {

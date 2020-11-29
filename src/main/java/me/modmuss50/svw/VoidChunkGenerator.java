@@ -22,7 +22,7 @@ public class VoidChunkGenerator extends ChunkGenerator {
 
 	public static final Codec<VoidChunkGenerator> CODEC = RecordCodecBuilder.create((instance) ->
 			instance.group(
-					BiomeSource.field_24713.fieldOf("biome_source")
+					BiomeSource.CODEC.fieldOf("biome_source")
 							.forGetter((generator) -> generator.biomeSource)
 			).apply(instance, instance.stable(VoidChunkGenerator::new))
 	);
@@ -32,7 +32,7 @@ public class VoidChunkGenerator extends ChunkGenerator {
 	}
 
 	@Override
-	protected Codec<? extends ChunkGenerator> method_28506() {
+	protected Codec<? extends ChunkGenerator> getCodec() {
 		return CODEC;
 	}
 
@@ -47,16 +47,6 @@ public class VoidChunkGenerator extends ChunkGenerator {
 
 	@Override
 	public void populateNoise(WorldAccess world, StructureAccessor accessor, Chunk chunk) {
-	}
-
-	@Override
-	public void setStructureStarts(StructureAccessor structureAccessor, Chunk chunk, StructureManager structureManager, long l) {
-
-	}
-
-	@Override
-	public void addStructureReferences(WorldAccess world, StructureAccessor accessor, Chunk chunk) {
-
 	}
 
 	@Override
