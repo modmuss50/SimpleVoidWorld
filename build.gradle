@@ -57,7 +57,7 @@ curseforge {
         id = '254466'
         changelog = 'A changelog can be found at https://github.com/modmuss50/SimpleVoidWorld'
         releaseType = 'release'
-        addGameVersion '1.16.1'
+        addGameVersion '1.16.4'
         addGameVersion 'Fabric'
         mainArtifact(file("${project.buildDir}/libs/${archivesBaseName}-${version}.jar"))
         afterEvaluate {
