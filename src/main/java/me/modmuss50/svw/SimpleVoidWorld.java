@@ -19,7 +19,7 @@ import java.util.Random;
 public class SimpleVoidWorld implements ModInitializer {
 	public static BlockPortal PORTAL_BLOCK;
 	public static ItemGroup SVW_GROUP = FabricItemGroupBuilder.build(new Identifier("simplevoidworld", "simplevoidworld"), () -> new ItemStack(PORTAL_BLOCK));
-	public static final RegistryKey<World> VOID_WORLD = RegistryKey.of(Registry.DIMENSION, new Identifier("simplevoidworld", "void"));
+	public static final RegistryKey<World> VOID_WORLD = RegistryKey.of(Registry.WORLD_KEY, new Identifier("simplevoidworld", "void"));
 
 	@Override
 	public void onInitialize() {

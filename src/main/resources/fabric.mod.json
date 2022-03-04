@@ -10,8 +10,9 @@
     ]
   },
   "requires": {
-    "fabricloader": ">=0.4.0",
+    "fabricloader": ">=0.13.3",
     "fabric": "*",
-    "fabric-dimensions-v1": ">=2.0.1"
+    "fabric-dimensions-v1": ">=2.0.1",
+    "minecraft": "~1.18.2"
   }
 }
